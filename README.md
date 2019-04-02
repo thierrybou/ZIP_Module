@@ -1,5 +1,5 @@
 # ZIP_Module
-This module lets you download a ZIP file located at an url and unzip it on your local machine
+This module scrapes a website url then lets you to download a ZIP file located in this scraped page and unzip it on your local machine
 
 ## Requires
 php: >=5.6
@@ -7,6 +7,7 @@ You can download it [here](https://www.php.net/downloads.php).
 
 ## Windows
 Launch the file IPTV_UPDATE_AUTO.bat, the IPTV files will be downloaded and extracted automatically in the previous directory related to .bat file.
+If you want update automatically the IPTV files at every boot of your machine, you can create a shortcut of the .bat file and place it in the `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup` directory.
 
 ## Linux
 Launch the command `php index.php` to download and extract the IPTV files or create you a cron to launch it automatically every day. 
