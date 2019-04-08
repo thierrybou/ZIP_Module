@@ -8,7 +8,6 @@
 
 class Autoloader
 {
-
     /**
      * Enregistre notre autoloader
      */
@@ -23,5 +22,4 @@ class Autoloader
     static function autoload($class){
         require 'class/' . $class . '.php';
     }
-
 }

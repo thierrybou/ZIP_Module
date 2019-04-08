@@ -19,9 +19,9 @@ class DownloadIPTVZipFile
 
     public function __construct(UrlInterface $url, $zipPath, $zipFile)
     {
-        $this->zipPath = $zipPath;
-        $this->zipFile = $zipFile;
-        $this->url     = $url;
+        $this->zipPath        = $zipPath;
+        $this->zipFile        = $zipFile;
+        $this->url            = $url;
     }
 
     /**
@@ -67,7 +67,7 @@ class DownloadIPTVZipFile
      * Concatenate file path and name
      * @return string
      */
-    private function getFullZipPath()
+    public function getFullZipPath()
     {
         return $this->zipPath.$this->zipFile;
     }

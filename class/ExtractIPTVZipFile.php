@@ -10,18 +10,36 @@ class ExtractIPTVZipFile
     /**
      * @var string
      */
-    private $extractPath;
+    public $extractPath;
 
     /**
      * @var DownloadIPTVZipFile
      */
     private $downloadIPTVZipFile;
 
-    public function __construct(DownloadIPTVZipFile $downloadIPTVZipFile, $extractPath)
+    /**
+     * @var DeleteOldFiles
+     */
+    private $deleteOldFiles;
+
+    /**
+     * @var int
+     */
+    private $delOldFilesParam;
+
+    public function __construct
+    (
+        DownloadIPTVZipFile $downloadIPTVZipFile,
+        DeleteOldFiles $deleteOldFiles,
+        $extractPath,
+        $delOldFilesParam
+    )
     {
         $this->zipArchive          = new ZipArchive();
         $this->downloadIPTVZipFile = $downloadIPTVZipFile;
+        $this->deleteOldFiles      = $deleteOldFiles;
         $this->extractPath         = $extractPath;
+        $this->delOldFilesParam    = $delOldFilesParam;
     }
 
     /**
@@ -32,12 +50,19 @@ class ExtractIPTVZipFile
         $zipDownloaded = $this->downloadIPTVZipFile->downloadZipFile();
 
         if (!isset($zipDownloaded)) {
-            exit('[ERROR] : Fail to extract the ZIP archive ');
+            Utils::log("ERROR", "Fail to extract the ZIP archive");
+            exit('[ERROR] : Fail to extract the ZIP archive');
         }
         $this->zipArchive->open($zipDownloaded);
         $this->zipArchive->extractTo($this->extractPath);
         $this->zipArchive->close();
 
-        echo "ZIP archive downloaded.";
+        Utils::log("INFO", "ZIP archive downloaded");
+
+        if ($this->delOldFilesParam) {
+            $this->deleteOldFiles->deleteOldDownloadedFiles($this->downloadIPTVZipFile->getFullZipPath());
+            $this->deleteOldFiles->deleteOldIPTVFiles($this->extractPath);
+            Utils::log("INFO", "Old files deleted");
+        }
     }
 }

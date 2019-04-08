@@ -64,8 +64,25 @@ class Container
             $instance = new $className
             (
                 $this->downloadZip(),
-                $this->parameters['unzip.path']
-                );
+                $this->deleteOldFiles(),
+                $this->parameters['unzip.path'],
+                $this->parameters['unzip.delete']
+            );
+        }
+
+        return $instance;
+    }
+
+    /**
+     * Return an instance of the DeleteOldFiles Class
+     * @return mixed
+     */
+    public function deleteOldFiles()
+    {
+        static $instance;
+        if (!isset($instance)) {
+            $className = $this->parameters['delete.class'];
+            $instance = new $className();
         }
 
         return $instance;
