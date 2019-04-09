@@ -10,13 +10,14 @@ Launch the file IPTV_UPDATE_AUTO.bat, the IPTV files will be downloaded and extr
 If you want update automatically the IPTV files at every boot of your machine, you can create a shortcut of the .bat file and place it in the `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup` directory.
 
 ## Linux
-Launch the command `php index.php` to download and extract the IPTV files or create you a cron to launch it automatically every day. 
+Launch the command `php index.php` to download and extract the IPTV files or create a cron to launch it automatically every day. 
 
 ### Options
 Go to `config/parameters.php` : 
 
 - change the value of `'download.path'` to change the path where the ZIP archive will be downloaded.
-- change the value of `'unzip.path'` to change the path where the ZIP archive will be extracted. 
+- change the value of `'unzip.path'` to change the path where the ZIP archive will be extracted.
+- change the value of `'unzip.delete'` to 0 to delete previous downloaded and extracted files that you already have. 
 
 If you want scraped another website url, you have to change these parameters :
 
